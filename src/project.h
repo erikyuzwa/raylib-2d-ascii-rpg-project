@@ -21,8 +21,23 @@ typedef enum {
 	STATE_COMBAT
 } GameState;
 
+typedef struct {
+	int hp;
+	int max_hp;
+	int attack;
+} Combatant;
+
+typedef enum {
+	COMBAT_TURN_PLAYER,
+	COMBAT_TURN_MONSTER
+} CombatTurnState;
+
+extern Player player;
 extern GameState game_state;
-extern char map[MAP_HEIGHT][MAP_WIDTH];
+extern char map[MAP_HEIGHT][MAP_WIDTH]; 
+extern int world_pos_x;
+extern int world_pos_y;
+extern CombatTurnState combat_turn;
 
 // game.c
 void game_startup();
@@ -36,7 +51,10 @@ void draw_map(Vector2 origin);
 void draw_player(Vector2 origin);
 
 // combat.c
+void update_combat_log(const char* text);
 void draw_combat_screen();
+void startup_combat();
+void update_combat();
 
 #endif
 

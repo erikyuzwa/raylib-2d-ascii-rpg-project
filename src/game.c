@@ -2,6 +2,8 @@
 
 Player player;
 GameState game_state;
+int world_pos_x;
+int world_pos_y;
 
 void game_startup() {
 
@@ -15,8 +17,6 @@ void game_startup() {
 void game_update() {
 
     char next_tile;
-    static int world_pos_x = 0;
-    static int world_pos_y = 0;
 
     switch (game_state) {
     case STATE_MAP:
@@ -33,24 +33,17 @@ void game_update() {
         next_tile = map[player.y][player.x];
         if (next_tile == 'M') {
             game_state = STATE_COMBAT;
+
+            startup_combat();
         }
 
 
         break;
     case STATE_COMBAT:
 
-        if (IsKeyPressed(KEY_A)) {
-            // always win!
-            game_state = STATE_MAP;
-            map[player.y][player.x] = '.';
-        }
+        update_combat();
 
-        if (IsKeyPressed(KEY_F)) {
-            game_state = STATE_MAP;
-            player.x = world_pos_x;
-            player.y = world_pos_y;
-
-        }
+        
         break;
     }
 
