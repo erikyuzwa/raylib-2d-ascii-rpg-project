@@ -24,6 +24,9 @@
     <ClCompile Include="src\map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\combat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\project.h">

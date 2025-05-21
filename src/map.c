@@ -8,7 +8,7 @@ char map[MAP_HEIGHT][MAP_WIDTH] = {
     "#.......######.....#",
     "#.......#..........#",
     "#.......#..........#",
-    "#..................#",
+    "#.....M............#",
     "#.....~~~~~........#",
     "#.....~~~~~........#",
     "#..........^^^^^...#",
@@ -24,6 +24,7 @@ Color get_tile_color(char tile) {
     case '.': return DARKGREEN; // grass
     case '^': return BROWN; // mountain
     case '~': return BLUE; // water
+    case 'M': return GREEN; // orc
     default: return RAYWHITE;
     }
 }

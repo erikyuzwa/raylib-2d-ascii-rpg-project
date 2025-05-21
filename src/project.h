@@ -16,6 +16,12 @@ typedef struct {
 	int x, y;
 } Player;
 
+typedef enum {
+	STATE_MAP,
+	STATE_COMBAT
+} GameState;
+
+extern GameState game_state;
 extern char map[MAP_HEIGHT][MAP_WIDTH];
 
 // game.c
@@ -28,6 +34,9 @@ void game_shutdown();
 Color get_tile_color(char tile);
 void draw_map(Vector2 origin);
 void draw_player(Vector2 origin);
+
+// combat.c
+void draw_combat_screen();
 
 #endif
 
