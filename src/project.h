@@ -12,9 +12,19 @@
 #define MAP_WIDTH 20
 #define MAP_HEIGHT 15
 
+#define MAX_ENEMIES 3
+
 typedef struct {
 	int x, y;
 } Player;
+
+typedef struct {
+	const char* name;
+	int hp;
+	int max_hp;
+	int attack;
+	bool alive;
+} Enemy;
 
 typedef enum {
 	STATE_MAP,
@@ -32,12 +42,17 @@ typedef enum {
 	COMBAT_TURN_MONSTER
 } CombatTurnState;
 
+typedef struct {
+	const char* name;
+	int max_hp;
+	int attack;
+} MonsterTemplate;
+
 extern Player player;
 extern GameState game_state;
 extern char map[MAP_HEIGHT][MAP_WIDTH]; 
 extern int world_pos_x;
 extern int world_pos_y;
-extern CombatTurnState combat_turn;
 
 // game.c
 void game_startup();
