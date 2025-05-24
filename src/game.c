@@ -4,17 +4,34 @@ Player player;
 GameState game_state;
 int world_pos_x;
 int world_pos_y;
+bool draw_fps = false;
 
 void game_startup() {
 
 	InitAudioDevice();
 
-	player = (Player){ 2, 2 };
+    game_reset();
+}
+
+void game_reset() {
+
+    player = (Player){ 2, 2 };
 
     game_state = STATE_MAP;
+
 }
 
 void game_update() {
+
+    if (IsKeyPressed(KEY_F1)) {
+        draw_fps = !draw_fps;
+    }
+    else if (IsKeyPressed(KEY_F2)) {
+        game_reset();
+    }
+    else if (IsKeyPressed(KEY_F4)) {
+        TakeScreenshot(generate_timestamp_filename());
+    }
 
     char next_tile;
 
@@ -66,7 +83,10 @@ void game_draw() {
         break;
     }
 
-	
+    if (draw_fps) {
+        float fps = GetFPS();
+        DrawText(TextFormat("FPS: %.2f", fps), 10, 10, 20, YELLOW);
+    }
 
 	EndDrawing();
 }
@@ -93,3 +113,13 @@ void draw_player(Vector2 origin) {
 
 }
 
+char* generate_timestamp_filename() {
+    time_t now;
+    struct tm* timenow;
+    static char filename[64];
+
+    time(&now);
+    timenow = localtime(&now);
+    strftime(filename, sizeof(filename), "screenshot_%Y%m%d_%H%M%S.png", timenow);
+    return filename;
+}

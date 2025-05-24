@@ -1,6 +1,10 @@
 #ifndef __PROJECT_H_
 #define __PROJECT_H_
 
+#if defined(_WIN64) || defined(_WIN32)
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "raylib.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,6 +63,8 @@ void game_startup();
 void game_update();
 void game_draw();
 void game_shutdown();
+void game_reset();
+char* generate_timestamp_filename();
 
 // map.c
 Color get_tile_color(char tile);
