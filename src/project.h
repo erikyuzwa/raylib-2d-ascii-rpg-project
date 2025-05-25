@@ -1,6 +1,7 @@
 #ifndef __PROJECT_H_
 #define __PROJECT_H_
 
+// if we're building on WIN32 or WIN64 (aka. Windows)
 #if defined(_WIN64) || defined(_WIN32)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
