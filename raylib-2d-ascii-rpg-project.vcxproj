@@ -23,6 +23,7 @@
     <ClCompile Include="src\game.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\map.c" />
+    <ClCompile Include="src\player.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\project.h" />

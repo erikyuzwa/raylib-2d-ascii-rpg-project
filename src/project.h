@@ -14,8 +14,16 @@
 #include <string.h>
 
 #define TILE_SIZE 32
-#define MAP_WIDTH 20
-#define MAP_HEIGHT 15
+
+#define MAP_WIDTH 80
+#define MAP_HEIGHT 50
+
+#define VIEW_COLS 40
+#define VIEW_ROWS 25
+
+#define UI_COLS 10
+#define SCREEN_WIDTH (VIEW_COLS + UI_COLS) * TILE_SIZE
+#define SCREEN_HEIGHT (VIEW_ROWS * TILE_SIZE)
 
 #define MAX_ENEMIES 3
 
@@ -53,11 +61,18 @@ typedef struct {
 	int attack;
 } MonsterTemplate;
 
+typedef struct {
+	char name[32];
+	char tiles[MAP_HEIGHT][MAP_WIDTH];
+	int player_spawn_x;
+	int player_spawn_y;
+} Map;
+
 extern Player player;
 extern GameState game_state;
-extern char map[MAP_HEIGHT][MAP_WIDTH]; 
-extern int world_pos_x;
-extern int world_pos_y;
+//extern char map[MAP_HEIGHT][MAP_WIDTH]; 
+//extern int world_pos_x;
+//extern int world_pos_y;
 
 // game.c
 void game_startup();
@@ -69,8 +84,10 @@ char* generate_timestamp_filename();
 
 // map.c
 Color get_tile_color(char tile);
-void draw_map(Vector2 origin);
+void draw_map(Map* map, Vector2 origin);
 void draw_player(Vector2 origin);
+int load_map_from_file(Map* map, const char* filename, const char* name);
+void spawn_player_to_map(Map* map, Player* player);
 
 // combat.c
 void update_combat_log(const char* text);

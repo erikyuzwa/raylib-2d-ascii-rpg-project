@@ -2,8 +2,8 @@
 
 int main(void) {
 	InitWindow(
-		MAP_WIDTH * TILE_SIZE,
-		MAP_HEIGHT * TILE_SIZE,
+		SCREEN_WIDTH,
+		SCREEN_HEIGHT,
 		"Raylib 2D ASCII RPG");
 	SetTargetFPS(60);
 	srand(time(NULL));
