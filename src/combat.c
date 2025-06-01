@@ -81,16 +81,12 @@ void update_combat() {
 			combat_turn = COMBAT_TURN_MONSTER;
 		}
 
-		if (IsKeyPressed(KEY_D)) {
-			update_combat_log("You defend.");
-			combat_turn = COMBAT_TURN_MONSTER;
-		}
-
 		if (IsKeyPressed(KEY_F)) {
 			update_combat_log("You flee!");
 			game_state = STATE_MAP;
-			player.x = world_pos_x;
-			player.y = world_pos_y;
+			// TODO: fix me!
+			//player.x = world_pos_x;
+			//player.y = world_pos_y;
 		}
 		break;
 	case COMBAT_TURN_MONSTER:
@@ -120,7 +116,8 @@ void update_combat() {
 			snprintf(combat_log, sizeof(combat_log), "You defeated all the enemies!");
 
 			game_state = STATE_MAP;
-			map[player.y][player.x] = '.';
+			// TODO: fix me!
+			//map[player.y][player.x] = '.';
 			player_combatant.hp = player_combatant.max_hp;
 		}
 
@@ -164,6 +161,6 @@ void draw_combat_screen() {
 	text_offset_y += 30;
 
 	if (combat_turn == COMBAT_TURN_PLAYER) {
-		DrawText("[A] Attack  [D] Defend  [F] Flee", 60, text_offset_y, 20, YELLOW);
+		DrawText("[A] Attack  [F] Flee", 60, text_offset_y, 20, YELLOW);
 	}
 }
