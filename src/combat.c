@@ -81,14 +81,10 @@ void update_combat() {
 			combat_turn = COMBAT_TURN_MONSTER;
 		}
 
-		/*if (IsKeyPressed(KEY_D)) {
-			update_combat_log("You defend.");
-			combat_turn = COMBAT_TURN_MONSTER;
-		}*/
-
 		if (IsKeyPressed(KEY_F)) {
 			update_combat_log("You flee!");
 			game_state = STATE_MAP;
+			// TODO: fix me!
 			//player.x = world_pos_x;
 			//player.y = world_pos_y;
 		}
@@ -120,6 +116,7 @@ void update_combat() {
 			snprintf(combat_log, sizeof(combat_log), "You defeated all the enemies!");
 
 			game_state = STATE_MAP;
+			// TODO: fix me!
 			//map[player.y][player.x] = '.';
 			player_combatant.hp = player_combatant.max_hp;
 		}

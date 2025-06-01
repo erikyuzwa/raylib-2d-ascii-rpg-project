@@ -2,8 +2,6 @@
 
 Player player;
 GameState game_state;
-//int world_pos_x;
-//int world_pos_y;
 bool draw_fps = false;
 
 Map* game_current_map = NULL;
@@ -19,8 +17,6 @@ void game_startup() {
 }
 
 void game_reset() {
-
-    //player = (Player){ 2, 2 };
 
     game_state = STATE_MAP;
 
@@ -41,41 +37,18 @@ void game_update() {
         TakeScreenshot(generate_timestamp_filename());
     }
 
-   //char next_tile;
-
     switch (game_state) {
     case STATE_MAP:
 
         update_player(game_current_map, &player);
-
-        //world_pos_x = player.x;
-        //world_pos_y = player.y;
-
-        // player movement
-        /*if (IsKeyPressed(KEY_RIGHT) && map[player.y][player.x + 1] != '#') player.x++;
-        if (IsKeyPressed(KEY_LEFT) && map[player.y][player.x - 1] != '#') player.x--;
-        if (IsKeyPressed(KEY_DOWN) && map[player.y + 1][player.x] != '#') player.y++;
-        if (IsKeyPressed(KEY_UP) && map[player.y - 1][player.x] != '#') player.y--;
-
-        next_tile = map[player.y][player.x];
-        if (next_tile == 'M') {
-            game_state = STATE_COMBAT;
-
-            startup_combat();
-        }*/
-
 
         break;
     case STATE_COMBAT:
 
         update_combat();
 
-        
         break;
     }
-
-    
-
 }
 
 void game_draw() {

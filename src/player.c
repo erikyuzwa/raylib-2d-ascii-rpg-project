@@ -31,4 +31,13 @@ void update_player(Map* current_map, Player* player) {
         player->x = newX;
         player->y = newY;
     }
+
+
+    /*
+    * TODO: fix me!
+    if (next_tile == 'M') {
+        game_state = STATE_COMBAT;
+
+        startup_combat();
+    }*/
 }
