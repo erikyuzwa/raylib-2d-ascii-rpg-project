@@ -98,11 +98,11 @@ void update_view_data(Map* map, Player* player, int view_width, int view_height)
     int map_cols = map->number_of_cols;
     int map_rows = map->number_of_rows;
 
-    for (int y = 0; y < view_height; y++) {
-        for (int x = 0; x < view_width; x++) {
+    for (int y = 0; y < VIEW_TOTAL_HEIGHT; y++) {
+        for (int x = 0; x < VIEW_TOTAL_WIDTH; x++) {
 
             // fill border with special tile '*'
-            if (x == 0 || y == 0 || x == view_width - 1 || y == view_height - 1) {
+            if (x == 0 || y == 0 || x == VIEW_TOTAL_WIDTH - 1 || y == VIEW_TOTAL_HEIGHT - 1) {
                 view_data[y][x].data = '*';
                 view_data[y][x].id = -1;
             }

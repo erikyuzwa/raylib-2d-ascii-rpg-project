@@ -42,7 +42,7 @@ void game_update() {
 
         update_player(game_current_map, &player);
 
-        update_view_data(game_current_map, &player, VIEW_TOTAL_WIDTH, VIEW_TOTAL_HEIGHT);
+        update_view_data(game_current_map, &player, VIEW_WIDTH, VIEW_HEIGHT);
 
         break;
     case STATE_COMBAT:
