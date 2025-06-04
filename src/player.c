@@ -2,8 +2,8 @@
 
 void draw_player(int view_width, int view_height) {
     Vector2 pos = {
-        view_width / 2 * TILE_SIZE,
-        view_height / 2 * TILE_SIZE
+        (1 + view_width / 2) * TILE_SIZE,
+        (1 + view_height / 2) * TILE_SIZE
     };
 
     DrawTextEx(

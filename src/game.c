@@ -42,7 +42,7 @@ void game_update() {
 
         update_player(game_current_map, &player);
 
-        update_view_data(game_current_map, &player, VIEW_WIDTH, VIEW_HEIGHT);
+        update_view_data(game_current_map, &player, VIEW_TOTAL_WIDTH, VIEW_TOTAL_HEIGHT);
 
         break;
     case STATE_COMBAT:
@@ -57,13 +57,10 @@ void game_draw() {
 	BeginDrawing();
 	ClearBackground(BLACK);
 
-    //Vector2 origin = { 0, 0 };
-
     switch (game_state) {
     case STATE_MAP:
         
-        //draw_map(game_current_map, origin);
-        draw_view_data(VIEW_WIDTH, VIEW_HEIGHT);
+        draw_view_data(VIEW_TOTAL_WIDTH, VIEW_TOTAL_HEIGHT);
         draw_player(VIEW_WIDTH, VIEW_HEIGHT);
         break;
     case STATE_COMBAT:

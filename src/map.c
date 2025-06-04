@@ -1,9 +1,10 @@
 #include "project.h"
 
-Tile view_data[VIEW_HEIGHT][VIEW_WIDTH];
+Tile view_data[VIEW_TOTAL_HEIGHT][VIEW_TOTAL_WIDTH];
 
-Color get_tile_color(char tile) {
-    switch (tile) {
+Color get_color_from_tile(Tile tile) {
+    switch (tile.data) {
+    case '*': return YELLOW;
     case '#': return GRAY; // wall 
     case '.': return DARKGREEN; // grass
     case '^': return BROWN; // mountain
@@ -99,15 +100,23 @@ void update_view_data(Map* map, Player* player, int view_width, int view_height)
 
     for (int y = 0; y < view_height; y++) {
         for (int x = 0; x < view_width; x++) {
-            int map_x = start_x + x;
-            int map_y = start_y + y;
 
-            if (map_x >= 0 && map_x < map_cols && map_y >= 0 && map_y < map_rows) {
-                view_data[y][x] = map->tiles[map_y][map_x];
+            // fill border with special tile '*'
+            if (x == 0 || y == 0 || x == view_width - 1 || y == view_height - 1) {
+                view_data[y][x].data = '*';
+                view_data[y][x].id = -1;
             }
             else {
-                view_data[y][x].data = ' ';
-                view_data[y][x].id = 0;
+                int map_x = start_x + (x - 1);
+                int map_y = start_y + (y - 1);
+
+                if (map_x >= 0 && map_x < map_cols && map_y >= 0 && map_y < map_rows) {
+                    view_data[y][x] = map->tiles[map_y][map_x];
+                }
+                else {
+                    view_data[y][x].data = ' ';
+                    view_data[y][x].id = 0;
+                }
             }
         }
     }
@@ -123,9 +132,13 @@ void draw_view_data(int view_width, int view_height) {
             int screen_x = x * TILE_SIZE;
             int screen_y = y * TILE_SIZE;
 
-            Color color = LIGHTGRAY;
-            if (t.data == '#') color = DARKGRAY;
+            Color color = get_color_from_tile(t);
+
+            /*Color color = LIGHTGRAY;
+            if (t.id == -1) color = YELLOW;
+            else if (t.data == '#') color = DARKGRAY;
             else if (t.data == '.') color = GREEN;
+            else color = LIGHTGRAY;*/
 
             Vector2 pos = {
                 screen_x, screen_y
@@ -143,6 +156,7 @@ void draw_view_data(int view_width, int view_height) {
 }
 
 
+/*
 void draw_map(Map* map, Vector2 origin) {
 
     int rows = map->number_of_rows;
@@ -168,5 +182,5 @@ void draw_map(Map* map, Vector2 origin) {
     }
 
 }
-
+*/
 
