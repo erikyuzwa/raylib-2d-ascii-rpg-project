@@ -62,10 +62,18 @@ typedef struct {
 } MonsterTemplate;
 
 typedef struct {
+	char data;
+	int id;
+} Tile;
+
+typedef struct {
 	char name[32];
-	char tiles[MAP_HEIGHT][MAP_WIDTH];
+	//char tiles[MAP_HEIGHT][MAP_WIDTH];
+	Tile tiles[MAP_HEIGHT][MAP_WIDTH];
 	int player_spawn_x;
 	int player_spawn_y;
+	int number_of_cols;
+	int number_of_rows;
 } Map;
 
 extern Player player;

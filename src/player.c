@@ -19,17 +19,17 @@ void draw_player(Vector2 origin) {
 void update_player(Map* current_map, Player* player) {
     if (!current_map) return; // make sure a map is loaded
 
-    int newX = player->x;
-    int newY = player->y;
+    int new_x = player->x;
+    int new_y = player->y;
 
-    if (IsKeyPressed(KEY_RIGHT)) newX++;
-    if (IsKeyPressed(KEY_LEFT)) newX--;
-    if (IsKeyPressed(KEY_DOWN)) newY++;
-    if (IsKeyPressed(KEY_UP)) newY--;
+    if (IsKeyPressed(KEY_RIGHT)) new_x++;
+    if (IsKeyPressed(KEY_LEFT)) new_x--;
+    if (IsKeyPressed(KEY_DOWN)) new_y++;
+    if (IsKeyPressed(KEY_UP)) new_y--;
 
-    if (current_map->tiles[newY][newX] != '#') {
-        player->x = newX;
-        player->y = newY;
+    if (current_map->tiles[new_y][new_x].data != '#') {
+        player->x = new_x;
+        player->y = new_y;
     }
 
 
