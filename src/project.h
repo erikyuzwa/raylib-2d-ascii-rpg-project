@@ -18,12 +18,14 @@
 #define MAP_WIDTH 80
 #define MAP_HEIGHT 50
 
-#define VIEW_COLS 40
-#define VIEW_ROWS 25
+#define VIEW_WIDTH 15
+#define VIEW_HEIGHT 11
+#define VIEW_TOTAL_WIDTH (VIEW_WIDTH + 2)
+#define VIEW_TOTAL_HEIGHT (VIEW_HEIGHT + 2)
 
 #define UI_COLS 10
-#define SCREEN_WIDTH (VIEW_COLS + UI_COLS) * TILE_SIZE
-#define SCREEN_HEIGHT (VIEW_ROWS * TILE_SIZE)
+#define SCREEN_WIDTH (VIEW_WIDTH + UI_COLS) * TILE_SIZE
+#define SCREEN_HEIGHT (VIEW_TOTAL_HEIGHT * TILE_SIZE)
 
 #define MAX_ENEMIES 3
 
@@ -62,10 +64,18 @@ typedef struct {
 } MonsterTemplate;
 
 typedef struct {
+	char data;
+	int id;
+} Tile;
+
+typedef struct {
 	char name[32];
-	char tiles[MAP_HEIGHT][MAP_WIDTH];
+	//char tiles[MAP_HEIGHT][MAP_WIDTH];
+	Tile tiles[MAP_HEIGHT][MAP_WIDTH];
 	int player_spawn_x;
 	int player_spawn_y;
+	int number_of_cols;
+	int number_of_rows;
 } Map;
 
 extern Player player;
@@ -80,17 +90,23 @@ void game_reset();
 char* generate_timestamp_filename();
 
 // map.c
-Color get_tile_color(char tile);
+Color get_color_from_tile(Tile tile);
 void draw_map(Map* map, Vector2 origin);
 void draw_player(Vector2 origin);
 int load_map_from_file(Map* map, const char* filename, const char* name);
 void spawn_player_to_map(Map* map, Player* player);
+void draw_view_data(int view_width, int view_height);
+void update_view_data(Map* map, Player* player, int view_width, int view_height);
 
 // combat.c
 void update_combat_log(const char* text);
 void draw_combat_screen();
 void startup_combat();
 void update_combat();
+
+// player.c
+void draw_player(int view_width, int view_height);
+void update_player(Map* current_map, Player* player);
 
 #endif
 
