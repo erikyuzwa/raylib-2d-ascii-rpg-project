@@ -1,5 +1,7 @@
 #include "project.h"
 
+Tile view_data[VIEW_HEIGHT][VIEW_WIDTH];
+
 Color get_tile_color(char tile) {
     switch (tile) {
     case '#': return GRAY; // wall 
@@ -87,6 +89,59 @@ void spawn_player_to_map(Map* current_map, Player* player) {
         player->y = current_map->player_spawn_y;
     }
 }
+
+void update_view_data(Map* map, Player* player, int view_width, int view_height) {
+
+    int start_x = player->x - (view_width / 2);
+    int start_y = player->y - (view_height / 2);
+    int map_cols = map->number_of_cols;
+    int map_rows = map->number_of_rows;
+
+    for (int y = 0; y < view_height; y++) {
+        for (int x = 0; x < view_width; x++) {
+            int map_x = start_x + x;
+            int map_y = start_y + y;
+
+            if (map_x >= 0 && map_x < map_cols && map_y >= 0 && map_y < map_rows) {
+                view_data[y][x] = map->tiles[map_y][map_x];
+            }
+            else {
+                view_data[y][x].data = ' ';
+                view_data[y][x].id = 0;
+            }
+        }
+    }
+
+}
+
+void draw_view_data(int view_width, int view_height) {
+
+    for (int y = 0; y < view_height; y++) {
+        for (int x = 0; x < view_width; x++) {
+            Tile t = view_data[y][x];
+
+            int screen_x = x * TILE_SIZE;
+            int screen_y = y * TILE_SIZE;
+
+            Color color = LIGHTGRAY;
+            if (t.data == '#') color = DARKGRAY;
+            else if (t.data == '.') color = GREEN;
+
+            Vector2 pos = {
+                screen_x, screen_y
+            };
+
+            DrawTextEx(
+                GetFontDefault(),
+                TextFormat("%c", t.data),
+                pos,
+                TILE_SIZE,
+                0,
+                color);
+        }
+    }
+}
+
 
 void draw_map(Map* map, Vector2 origin) {
 

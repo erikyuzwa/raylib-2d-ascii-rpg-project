@@ -1,9 +1,9 @@
 #include "project.h"
 
-void draw_player(Vector2 origin) {
+void draw_player(int view_width, int view_height) {
     Vector2 pos = {
-        origin.x + player.x * TILE_SIZE,
-        origin.y + player.y * TILE_SIZE
+        view_width / 2 * TILE_SIZE,
+        view_height / 2 * TILE_SIZE
     };
 
     DrawTextEx(

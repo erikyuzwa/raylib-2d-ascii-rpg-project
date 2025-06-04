@@ -18,12 +18,12 @@
 #define MAP_WIDTH 80
 #define MAP_HEIGHT 50
 
-#define VIEW_COLS 40
-#define VIEW_ROWS 25
+#define VIEW_WIDTH 19
+#define VIEW_HEIGHT 13
 
 #define UI_COLS 10
-#define SCREEN_WIDTH (VIEW_COLS + UI_COLS) * TILE_SIZE
-#define SCREEN_HEIGHT (VIEW_ROWS * TILE_SIZE)
+#define SCREEN_WIDTH (VIEW_WIDTH + UI_COLS) * TILE_SIZE
+#define SCREEN_HEIGHT (VIEW_HEIGHT * TILE_SIZE)
 
 #define MAX_ENEMIES 3
 
@@ -93,12 +93,17 @@ void draw_map(Map* map, Vector2 origin);
 void draw_player(Vector2 origin);
 int load_map_from_file(Map* map, const char* filename, const char* name);
 void spawn_player_to_map(Map* map, Player* player);
+void draw_view_data(int view_width, int view_height);
+void update_view_data(Map* map, Player* player, int view_width, int view_height);
 
 // combat.c
 void update_combat_log(const char* text);
 void draw_combat_screen();
 void startup_combat();
 void update_combat();
+
+// player.c
+void draw_player(int view_width, int view_height);
 
 #endif
 
