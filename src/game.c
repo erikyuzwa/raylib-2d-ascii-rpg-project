@@ -18,6 +18,9 @@ void game_startup() {
 
 void game_reset() {
 
+    // reset player xp
+    player.xp = 0;
+
     game_state = STATE_MAP;
 
     game_current_map = &world_map;
@@ -62,6 +65,9 @@ void game_draw() {
         
         draw_view_data(VIEW_TOTAL_WIDTH, VIEW_TOTAL_HEIGHT);
         draw_player(VIEW_WIDTH, VIEW_HEIGHT);
+
+        draw_player_stats(&player);
+
         break;
     case STATE_COMBAT:
         draw_combat_screen();
