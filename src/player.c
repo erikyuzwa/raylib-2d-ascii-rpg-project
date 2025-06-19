@@ -16,6 +16,21 @@ void draw_player(int view_width, int view_height) {
 
 }
 
+void draw_player_stats(Player* player) {
+    Vector2 pos = {
+        VIEW_TOTAL_WIDTH * TILE_SIZE,
+        TILE_SIZE
+    };
+
+    DrawTextEx(
+        GetFontDefault(),
+        TextFormat("XP: %d", player->xp),
+        pos,
+        TILE_SIZE,
+        1.5f,
+        YELLOW);
+}
+
 void update_player(Map* current_map, Player* player) {
     if (!current_map) return; // make sure a map is loaded
 
@@ -32,12 +47,20 @@ void update_player(Map* current_map, Player* player) {
         player->y = new_y;
     }
 
+    int enemy_count = current_map->number_of_enemies;
+    for (int i = 0; i < enemy_count; i++) {
+        if (!current_map->enemies[i].alive) continue;
 
-    /*
-    * TODO: fix me!
-    if (next_tile == 'M') {
-        game_state = STATE_COMBAT;
+        int m_x = current_map->enemies[i].x;
+        int m_y = current_map->enemies[i].y;
 
-        startup_combat();
-    }*/
+        if (player->x == m_x && player->y == m_y) {
+            game_state = STATE_COMBAT;
+            startup_combat(player->x, player->y, &current_map->enemies[i]);
+            break;
+        }
+    }
+
+    
 }
+
